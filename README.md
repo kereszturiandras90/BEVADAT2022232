@@ -1,0 +1,2 @@
+# bevadat
+bevezetes az adattudományba
