@@ -15,10 +15,6 @@ def contains_odd(args):
      
  return Contains
  
-Numbers = [12,11,4,4]
-
-#contains_odd(Numbers)
-print(contains_odd(Numbers))
 
 
 #Készíts egy függvényt ami paraméterként egy listát vár amiben egész számok vannak,
@@ -38,10 +34,7 @@ def is_odd(args):
      
  return iterator
  
-Numbers = [1,2,1,4]
 
-#contains_odd(Numbers)
-print(list(is_odd(Numbers)))
 
 
 
@@ -63,10 +56,7 @@ def element_wise_sum(ls1,ls2):
      
  return res_list
 
-test_list1 = [1, 3, 4, 6, 8]
-test_list2 = [4, 5, 6, 2, 10]
 
-print(list(element_wise_sum(test_list1, test_list2)))
 
 
 #Készíts egy függvényt ami paraméterként egy dictionary-t vár és egy listával tér vissza
@@ -87,10 +77,7 @@ def dict_to_list(dict):
      
  return result
 
-test_dict = {"egy":1,"ketto":2,"harom":3}
 
-
-print(list(dict_to_list(test_dict)))
 
 #Ha végeztél a feladatokkal akkor ezt a jupytert alakítsd át egy .py file-ra 
 #ha vscode-ban dolgozol: https://stackoverflow.com/questions/64297272/best-way-to-convert-ipynb-to-py-in-vscode
