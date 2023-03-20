@@ -76,4 +76,3 @@ def flatten(a):
 
   c = a.flatten()
   return c
-
