@@ -103,4 +103,20 @@ def math_bar_plot(df):
     plt.show()
     return plt
 
-print(math_bar_plot(csv_to_df("StudentsPerformance.csv")))   
+print(math_bar_plot(csv_to_df("StudentsPerformance.csv")))  
+
+def writing_hist(df):
+
+    #mylist = ['writing score']
+    #unique = reduce(lambda l, x: l.append(x) or l if x not in l else l, mylist, [])
+
+    new_df = df.copy()
+    new_df.hist(column='writing score')
+    plt.xlabel("Writing Score")
+    plt.ylabel("Number of Students")
+    plt.title("Distribution of Writing Scores")
+    plt.show()
+    plt.show()
+    return plt
+
+print(writing_hist(csv_to_df("StudentsPerformance.csv")))  
