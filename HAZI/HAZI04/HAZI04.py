@@ -85,4 +85,22 @@ def add_grade(df):
     new_df['grade']=new_df['grade'].apply(grade_range)
     return new_df
 
-print(add_grade(csv_to_df("StudentsPerformance.csv")))     
+print(add_grade(csv_to_df("StudentsPerformance.csv")))   
+
+def math_bar_plot(df):
+    new_df = df.copy()
+    sex = (['female', 'male'])
+    MathAvg = (new_df[(new_df['gender']=="female")])['math score'].mean(), (new_df[(new_df['gender']=="male")])['math score'].mean()
+  
+    #fig = plt.figure(figsize = (10, 5))
+ 
+
+    plt.bar(sex , MathAvg)
+ 
+    plt.xlabel("Gender")
+    plt.ylabel("Math Score")
+    plt.title("Average Math Score by Gender")
+    plt.show()
+    return plt
+
+print(math_bar_plot(csv_to_df("StudentsPerformance.csv")))   
