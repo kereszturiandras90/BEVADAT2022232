@@ -9,10 +9,10 @@ def dict_to_dataframe(data):
     return MyDataFrame
 
 
-#stats = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
-#      "capital": ["Brasilia", "Moscow", "New Dehli", "Beijing", "Pretoria"],
-#      "area": [8.516, 17.10, 3.286, 9.597, 1.221],
-#      "population": [200.4, 143.5, 1252, 1357, 52.98] }
+stats = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
+      "capital": ["Brasilia", "Moscow", "New Dehli", "Beijing", "Pretoria"],
+      "area": [8.516, 17.10, 3.286, 9.597, 1.221],
+      "population": [200.4, 143.5, 1252, 1357, 52.98] }
 #print(dict_to_dataframe(stats))
 # Készíts egy függvényt ami a bemeneti DataFrame-ből vissza adja csak azt az oszlopot amelynek a neve a bemeneti string-el megegyező.\n","\n","Egy példa a bemenetre: test_df, 'area'\n","Egy példa a kimenetre: test_df\n","return type: pandas.core.series.Series\n","függvény neve: get_column\n","'''"]}
 
@@ -42,19 +42,19 @@ def plot_population(df):
     countries = list(new_df['country'])
     populations = list(new_df['population'])
   
-    fig = plt.figure(figsize = (10, 5))
+   
  
 
-    plt.bar(countries, populations, color ='maroon',
-        width = 0.4)
+    plt.bar(countries, populations)
  
     plt.xlabel("Country")
     plt.ylabel("Population (millions)")
     plt.title("Population of Countries")
+    fig = plt.figure()
     plt.show()
-    return plt
+    return fig
 
-#plot_population(dict_to_dataframe(stats))
+#print(plot_population(dict_to_dataframe(stats)))
 
 def plot_area(df):
     new_df = df.copy()
@@ -64,8 +64,9 @@ def plot_area(df):
     fig, ax = plt.subplots()
     ax.pie(sizes, labels=labels)
     plt.title("Area of Countries")
+    #fig, ax = plt.subplots()
     plt.show()
-    return plt
+    return fig
 
-#plot_area(dict_to_dataframe(stats))
+#print(plot_area(dict_to_dataframe(stats)))
 
