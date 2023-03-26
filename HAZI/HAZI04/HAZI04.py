@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+#import pie, axis, show
 import random
 import numpy as np
 
@@ -48,17 +49,17 @@ def average_scores(df):
     return new_df.groupby(['parental level of education']).agg(agg_functions)
      
 
-print(average_scores(csv_to_df("StudentsPerformance.csv"))) 
+#print(average_scores(csv_to_df("StudentsPerformance.csv"))) 
 
 
 def add_age(df):
     new_df = df.copy()
     random.seed(42)   
-    new_df['age'] = np.random.randint(18, 66, new_df.shape[0])
+    new_df['age'] = np.random.randint(18, 67, new_df.shape[0])
 
     return new_df
 
-print(add_age(csv_to_df("StudentsPerformance.csv"))) 
+#print(add_age(csv_to_df("StudentsPerformance.csv"))) 
 
 def female_top_score(df):
     new_df = df.copy()
@@ -69,7 +70,7 @@ def female_top_score(df):
 
     return ered
 
-print(female_top_score(csv_to_df("StudentsPerformance.csv"))) 
+#print(female_top_score(csv_to_df("StudentsPerformance.csv"))) 
 
 
 def add_grade(df):
@@ -85,38 +86,56 @@ def add_grade(df):
     new_df['grade']=new_df['grade'].apply(grade_range)
     return new_df
 
-print(add_grade(csv_to_df("StudentsPerformance.csv")))   
+#print(add_grade(csv_to_df("StudentsPerformance.csv")))   
 
 def math_bar_plot(df):
     new_df = df.copy()
     sex = (['female', 'male'])
     MathAvg = (new_df[(new_df['gender']=="female")])['math score'].mean(), (new_df[(new_df['gender']=="male")])['math score'].mean()
-  
+    fig, ax = plt.subplots()
     #fig = plt.figure(figsize = (10, 5))
  
 
-    plt.bar(sex , MathAvg)
+    ax.bar(sex , MathAvg)
  
-    plt.xlabel("Gender")
-    plt.ylabel("Math Score")
-    plt.title("Average Math Score by Gender")
+    ax.set_xlabel("Gender")
+    ax.set_ylabel("Math Score")
+    ax.set_title("Average Math Score by Gender")
     plt.show()
-    return plt
+    return fig
 
-print(math_bar_plot(csv_to_df("StudentsPerformance.csv")))  
+#print(math_bar_plot(csv_to_df("StudentsPerformance.csv")))  
 
 def writing_hist(df):
 
     #mylist = ['writing score']
     #unique = reduce(lambda l, x: l.append(x) or l if x not in l else l, mylist, [])
+    fig, ax = plt.subplots()
 
     new_df = df.copy()
-    new_df.hist(column='writing score')
-    plt.xlabel("Writing Score")
-    plt.ylabel("Number of Students")
-    plt.title("Distribution of Writing Scores")
-    plt.show()
-    plt.show()
-    return plt
+    ax = new_df.plot.hist(column='writing score')
+    #plt.xlabel("Writing Score")
+    #plt.ylabel("Number of Students")
+    #plt.title("Distribution of Writing Scores")
+    ax.set_title('Distribution of writing scores')
+    ax.set_ylabel('Number of Students')
+    ax.set_xlabel('Writing Score')
 
-print(writing_hist(csv_to_df("StudentsPerformance.csv")))  
+    plt.show()
+    return fig
+
+#print(writing_hist(csv_to_df("StudentsPerformance.csv")))  
+
+def ethnicity_pie_chart(df):
+    new_df = df.copy()
+    fig, ax = plt.subplots()
+    my_labels = ('group A', 'group B', 'group C', 'group D', 'group E')
+    ax = new_df['race/ethnicity'].value_counts().plot(kind='pie', figsize=(28,12), autopct='%1.1f%%', labels=None)
+    ax.axes.get_yaxis().set_visible(False)
+    ax.set_title('Proportion of Students by Race/Ethnicity')
+    #plt.legend(loc=5, labels=my_labels)
+
+    return fig
+
+
+#print(ethnicity_pie_chart(csv_to_df("StudentsPerformance.csv")))    
