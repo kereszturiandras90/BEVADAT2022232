@@ -42,16 +42,16 @@ def plot_population(df):
     countries = list(new_df['country'])
     populations = list(new_df['population'])
   
-   
+    fig, ax = plt.subplots()
+    ax.bar(countries, populations)
  
 
     plt.bar(countries, populations)
  
-    plt.xlabel("Country")
-    plt.ylabel("Population (millions)")
-    plt.title("Population of Countries")
-    fig = plt.figure()
-    plt.show()
+    ax.set_xlabel("Country")
+    ax.set_ylabel("Population (millions)")
+    ax.set_title("Population of Countries")
+    #fig = plt.figure()
     return fig
 
 #print(plot_population(dict_to_dataframe(stats)))
@@ -63,9 +63,8 @@ def plot_area(df):
     sizes = list(new_df['area'])
     fig, ax = plt.subplots()
     ax.pie(sizes, labels=labels)
-    plt.title("Area of Countries")
+    ax.set_title("Area of Countries")
     #fig, ax = plt.subplots()
-    plt.show()
     return fig
 
 #print(plot_area(dict_to_dataframe(stats)))
