@@ -11,8 +11,9 @@ def csv_to_df(path):
 def capitalize_columns(df):
   new_df = df.copy()  
   
-  new_df = new_df.rename(columns=lambda x: x.upper() if "e" in x else x)  
-  return new_df  
+  new_df = new_df.rename(columns=lambda x: x.capitalize() if "e" not in x else x)  
+  return new_df
+   
 
 
 def math_passed_count(df):
@@ -102,7 +103,6 @@ def writing_hist(df):
     ax.set_title('Distribution of Writing Scores')
     ax.set_ylabel('Number of Students')
     ax.set_xlabel('Writing Score')
-    plt.show()
 
     return fig
   
