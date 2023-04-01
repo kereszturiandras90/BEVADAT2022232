@@ -49,9 +49,14 @@ class KNNClassifier:
      return true_positive / len(self.y_test) * 100
 
     def confusion_matrix(self) -> np.ndarray:
-        conf_matrix = confusion_matrix(self._test,self.y_preds)
+        conf_matrix = confusion_matrix(self.y_test,self.y_preds)
         #sns.heatmap(conf_matrix,annot=True)
         return conf_matrix
+
+p1 = KNNClassifier(0.5,0.5)
+x, y = p1.load_csv("diabetes.csv")
+#    x, y = load_csv("diabetes.csv")
+print(p1.train_test_split(x,y))        
  
 
     
