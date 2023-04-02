@@ -1,4 +1,5 @@
 import numpy as np
+import gc
 import seaborn as sns
 from typing import Tuple
 from scipy.stats import mode
@@ -52,8 +53,6 @@ class KNNClassifier:
     def confusion_matrix(self) -> np.ndarray:
         conf_matrix = confusion_matrix(self.y_test,self.y_preds)
         return conf_matrix
-
- 
  
 
     
