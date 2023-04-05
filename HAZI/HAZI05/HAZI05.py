@@ -1,3 +1,4 @@
+import math
 import pandas as pd
 from typing import Tuple
 from scipy.stats import mode
@@ -18,7 +19,7 @@ class KNNClassifier:
     def load_csv(csv_path:str) -> Tuple[pd.DataFrame, pd.DataFrame]:
         dataset = pd.read_csv(csv_path, header=None, skiprows=[0])
         dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-        x, y = dataset.iloc[:, :8], dataset.iloc[:, -1]
+        x, y = dataset.iloc[:, :9], dataset.iloc[:, -1]
         return x, y
 
     def train_test_split(self, features: pd.array, labels: pd.array) -> tuple:
@@ -32,23 +33,22 @@ class KNNClassifier:
         return (self.x_train, self.y_train, self.x_test, self.y_test)
 
     def euclidean(self, element_of_x:pd.DataFrame) -> pd.DataFrame:
-        diff = self.x_train - element_of_x
-        squared_diff = diff ** 2
-        sum_squared_diff = squared_diff.sum(axis=1)
-        return sum_squared_diff
+        return pd.DataFrame.sub(self.x_train, element_of_x, axis=1).pow(2).sum(axis=1).apply(math.sqrt)
 
     def predict(self, x_test:pd.DataFrame) -> pd.DataFrame:
         labels_pred = []
         for _, x_test_element in x_test.iterrows():
             distances = self.euclidean(x_test_element)
-            distances = pd.array(sorted(zip(distances,self.y_train)))
-            label_pred = distances[:self.k]._mode()[0]
+            distances = pd.DataFrame(sorted(zip(distances,self.y_train)))
+            label_pred = mode(distances[:self.k],keepdims=False).mode
             labels_pred.append(label_pred)
-        self.y_preds = pd.array(labels_pred, dtype=int)
-        self.y_preds = self.y_preds[:,1]
+        self.y_preds = pd.DataFrame(labels_pred, dtype=int)
+        self.y_preds = self.y_preds[1].values
         return self.y_preds
 
     def accuracy(self) -> float:
+        print(self.y_test)
+        print(self.y_preds)
         true_positive = (self.y_test == self.y_preds).sum()
         return true_positive / len(self.y_test) * 100
 
@@ -66,8 +66,6 @@ class KNNClassifier:
            results.append(result)
         best = max(results,key=lambda item:item[1])
         return best[0]
-
-
 
     
     
